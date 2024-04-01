@@ -6,12 +6,12 @@ import logging
 
 
 class AuthWindow(QMainWindow, Ui_Form):
-    def __init__(self, callback_on_success, parent=None):
+    def __init__(self, server_api, parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.password_line_edit.setEchoMode(QLineEdit.Password)
         self.login_button.clicked.connect(self.__login_btn_pressed)
-        self.callable = callback_on_success
+        self.server_api = server_api
 
     def __login_btn_pressed(self):
         logging.info('login btn pressed')
@@ -25,9 +25,8 @@ class AuthWindow(QMainWindow, Ui_Form):
             show_error_window('All fields must be filled in')
             return
 
-        if ServerApi.authorize(self.login_line_edit.text(), self.password_line_edit.text()):
+        if self.server_api.authorize(self.login_line_edit.text(), self.password_line_edit.text()):
             logging.info('authorization is successful')
-            self.callable()
         else:
             logging.warning('authorization failed')
 
