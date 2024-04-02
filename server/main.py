@@ -2,6 +2,7 @@ import os
 import logging
 import datetime
 from server.net.https_server import HttpsServer
+from server.db.db_api import DBHandler
 
 
 def init_logger():
@@ -23,6 +24,7 @@ def main():
     try:
         init_logger()
 
+        db = DBHandler('../secrets/local.env')
         server = HttpsServer(os.path.abspath('../secrets/cert.pem'), os.path.abspath('../secrets/key.pem'))
         server.run()
     except Exception as e:

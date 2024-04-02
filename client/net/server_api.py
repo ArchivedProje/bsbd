@@ -45,3 +45,11 @@ class ServerApi:
     def get_role(self, login):
         data = {'login': login}
         return self.__send_request('role', data, 'GET')
+
+    def get_billings(self, login):
+        data = {'login': login}
+        return self.__send_request('billings', data, 'GET')
+
+    def get_orders(self, login):
+        data = {'login': login}
+        return self.__send_request('orders', data, 'GET')

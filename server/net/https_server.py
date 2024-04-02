@@ -20,3 +20,13 @@ def authorize():
 @app.route('/role', methods=['GET'])
 def get_role():
     return make_response('client', 200)
+
+
+@app.route('/billings', methods=['GET'])
+def get_billings():
+    return make_response('', 200)
+
+
+@app.route('/orders', methods=['GET'])
+def get_orders():
+    return make_response('', 200)

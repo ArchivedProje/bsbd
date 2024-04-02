@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QLineEdit
 from client.pyui.auth_window_model import Ui_Form
-from client.pyui.utils import show_error_window
+from client.pyui.utils import show_error_window, hash_password
 import logging
 
 
@@ -40,7 +40,7 @@ class AuthWindow(QMainWindow, Ui_Form):
             return
 
         self.__disable_widgets()
-        response = self.server_api.authorize(self.login_line_edit.text(), self.password_line_edit.text())
+        response = self.server_api.authorize(self.login_line_edit.text(), hash_password(self.password_line_edit.text()))
         self.__enable_widgets()
 
         if response is None:

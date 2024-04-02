@@ -43,9 +43,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return possible_roles.get(response.text, Roles.Unknown)
         return None
 
+    def __get_client_data(self):
+        response = self.server_api.get_billings(self.login)
+        if response is None or response.status_code != 200:
+            return False
+        response = self.server_api.get_orders(self.login)
+        if response is None or response.status_code != 200:
+            return False
+        return True
+
+    def __get_realtor_data(self):
+        pass
+
+    def __get_performer_data(self):
+        pass
+
+    def __get_admin_data(self):
+        pass
+
     def __get_data_from_server(self):
         role = self.__get_role()
         if role is None or role == Roles.Unknown:
             logging.error(f'failed to get role of {self.login}')
             return False
-        return True
+        possible_roles = {
+            Roles.Client: self.__get_client_data,
+            Roles.Realtor: self.__get_realtor_data,
+            Roles.Admin: self.__get_admin_data,
+            Roles.Performer: self.__get_performer_data
+        }
+
+        return possible_roles[role]()
