@@ -15,3 +15,8 @@ class HttpsServer:
 @app.route('/authorize', methods=['POST'])
 def authorize():
     return make_response('authorized', 200)
+
+
+@app.route('/role', methods=['GET'])
+def get_role():
+    return make_response('client', 200)

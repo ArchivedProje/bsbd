@@ -7,14 +7,41 @@ class ServerApi:
         self.server_url = server_url
         self.cert_path = cert_path
 
+    @staticmethod
+    def __send_get(url, data):
+        try:
+            return requests.get(url, data, verify=False)
+        except Exception as e:
+            logging.error(f'failed to send https get request to {url} with data: {data}. error: {e}')
+        return None
+
+    @staticmethod
+    def __send_post(url, data):
+        try:
+            return requests.post(url, data, verify=False)
+        except Exception as e:
+            logging.error(f'failed to send https post request to {url} with data: {data}. error: {e}')
+        return None
+
+    def __send_request(self, url, data, req_type):
+        possible_requests = {
+            'GET': ServerApi.__send_get,
+            'POST': ServerApi.__send_post
+        }
+        if req_type not in possible_requests:
+            logging.error(f'got unknown request type: {req_type}')
+        logging.info(f'sending request: url: {url}, data: {data}, type: {req_type}')
+        response = possible_requests[req_type](self.server_url + f'/{url}', data)
+        if response is None:
+            logging.info('response is None')
+            return response
+        logging.info(f'response: text: {response.text}, status_code: {response.status_code}')
+        return response
+
     def authorize(self, login, password):
         data = {'login': login, 'password': password}
-        url = self.server_url + '/authorize'
-        logging.info(f'sending authorize request to {url}')
-        try:
-            response = requests.post(self.server_url + '/authorize', data, verify=False)
-            logging.info(f'received response: msg: {response.text}, status_code: {response.status_code}')
-            return response.status_code == 200
-        except Exception as e:
-            logging.error(f'failed to send https request. error: {e}')
-        return False
+        return self.__send_request('authorize', data, 'POST')
+
+    def get_role(self, login):
+        data = {'login': login}
+        return self.__send_request('role', data, 'GET')

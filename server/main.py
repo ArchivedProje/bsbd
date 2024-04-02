@@ -20,10 +20,13 @@ def init_logger():
 
 
 def main():
-    init_logger()
+    try:
+        init_logger()
 
-    server = HttpsServer(os.path.abspath('../secrets/cert.pem'), os.path.abspath('../secrets/key.pem'))
-    server.run()
+        server = HttpsServer(os.path.abspath('../secrets/cert.pem'), os.path.abspath('../secrets/key.pem'))
+        server.run()
+    except Exception as e:
+        logging.fatal(f'error: {e}')
 
 
 if __name__ == '__main__':
