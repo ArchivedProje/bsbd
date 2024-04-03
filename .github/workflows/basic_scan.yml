@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  basic_scan:
+  setup_python:
     runs-on: ubuntu-20.04
 
     steps:
@@ -23,6 +23,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+  trufflehog_scan:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install trufflehog
+        run: pip install trufflehog
+
+      - name: Run trufflehog
+        run: trufflehog --repo_path $(pwd) --branch master --json https://github.com/byteihq/bsbd > trufflehog_scan.json
+        continue-on-error: true
+
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          path: trufflehog_scan.json
+
+  snyk_scan:
+    runs-on: ubuntu-20.04
+    steps:
       - name: Install Snyk CLI
         run: |
           curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
@@ -32,20 +50,26 @@ jobs:
       - name: Authenticate Snyk
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
-      - name: Test for vulnerabilities
-        run: snyk test --all-projects --severity-threshold=high > snyk_scan.txt
+      - name: Test for vulnerable dependencies
+        run: snyk test --all-projects --severity-threshold=high --json > snyk_scan.json
         continue-on-error: true
 
+      - name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          path: snyk_scan.json
+
+  bandit_scan:
+    runs-on: ubuntu-20.04
+    steps:
       - name: Install bandit
         run: pip install bandit
 
       - name: Run Bandit
-        run: bandit -r . -lll > bandit_scan.txt
+        run: bandit -r $(pwd) --format json > bandit_scan.json
         continue-on-error: true
 
-      - name: Uploading results
+      - name: Upload results
         uses: actions/upload-artifact@v3
         with:
-          path: |
-            snyk_scan.txt
-            bandit_scan.txt
+          path: bandit_scan.json
