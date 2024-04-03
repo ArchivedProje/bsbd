@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  snyk_scan:
+  basic_scan:
     runs-on: ubuntu-20.04
 
     steps:
@@ -33,11 +33,19 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Test for vulnerabilities
-        run: snyk test --all-projects > snyk_scan.txt
+        run: snyk test --all-projects --severity-threshold=high > snyk_scan.txt
+        continue-on-error: true
+
+      - name: Install bandit
+        run: pip install bandit
+
+      - name: Run Bandit
+        run: bandit -r . -lll > bandit_scan.txt
         continue-on-error: true
 
       - name: Uploading results
         uses: actions/upload-artifact@v3
         with:
-          name: snyk_scan_output
-          path: snyk_scan.txt
+          path: |
+            snyk_scan.txt
+            bandit_scan.txt
