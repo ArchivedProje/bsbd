@@ -25,7 +25,7 @@ jobs:
 
   trufflehog_scan:
     runs-on: ubuntu-20.04
-    needs: python_setup
+    needs: setup_python
     steps:
       - name: Install trufflehog
         run: pip install trufflehog
@@ -41,7 +41,7 @@ jobs:
 
   snyk_scan:
     runs-on: ubuntu-20.04
-    needs: python_setup
+    needs: setup_python
     steps:
       - name: Install Snyk CLI
         run: |
@@ -63,7 +63,7 @@ jobs:
 
   bandit_scan:
     runs-on: ubuntu-20.04
-    needs: python_setup
+    needs: setup_python
     steps:
       - name: Install bandit
         run: pip install bandit
