@@ -1,4 +1,6 @@
-from flask import Flask, make_response
+from flask import Flask, make_response, request
+from server.db.db_api import DBHandler
+import json
 
 app = Flask(__name__)
 
@@ -24,9 +26,39 @@ def get_role():
 
 @app.route('/billings', methods=['GET'])
 def get_billings():
-    return make_response('', 200)
+    if 'login' not in request.args:
+        return make_response('login field not found', 404)
+    res = DBHandler().get_billings(request.args['login'])
+    if res is None:
+        return make_response('internal server error', 500)
+    out = list()
+    for row in res:
+        out.append({
+            'id': row[0],
+            'status': row[1],
+            'price': row[2],
+            'payment_date': row[3].strftime("%Y-%m-%d %H:%M:%S")
+        })
+    return make_response(json.dumps(out), 200)
 
 
 @app.route('/orders', methods=['GET'])
 def get_orders():
-    return make_response('', 200)
+    if 'login' not in request.args:
+        return make_response('login field not found', 404)
+    res = DBHandler().get_orders(request.args['login'])
+    if res is None:
+        return make_response('internal server error', 500)
+    out = list()
+    for row in res:
+        order = {
+            'id': row[0],
+            'client_id': row[1],
+            'realtor_id': row[2],
+            'status': row[3],
+            'start_date': row[4].strftime("%Y-%m-%d %H:%M:%S")
+        }
+        if row[5] is not None:
+            order['end_date'] = row[5].strftime("%Y-%m-%d %H:%M:%S")
+        out.append(order)
+    return make_response(json.dumps(out), 200)

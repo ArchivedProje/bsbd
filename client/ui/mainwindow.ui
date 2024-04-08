@@ -25,53 +25,58 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="ordersBtn">
        <property name="text">
-        <string>PushButton</string>
+        <string>Заказы</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="billingsBtn">
        <property name="text">
-        <string>PushButton</string>
+        <string>Счета</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="notifyBtn">
        <property name="text">
-        <string>PushButton</string>
+        <string>Уведомления</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="supportBtn">
        <property name="text">
-        <string>PushButton</string>
+        <string>Поддержка</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_5">
-       <property name="text">
-        <string>PushButton</string>
+       <property name="checkable">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
     </layout>
    </widget>
-   <widget class="QListView" name="listView">
+   <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
       <x>160</x>
       <y>0</y>
       <width>691</width>
-      <height>551</height>
+      <height>541</height>
      </rect>
     </property>
-    <property name="flow">
-     <enum>QListView::LeftToRight</enum>
+    <property name="styleSheet">
+     <string notr="true">text-align: center;</string>
     </property>
    </widget>
   </widget>

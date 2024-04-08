@@ -20,11 +20,16 @@ def init_logger():
     logging.basicConfig(level=logging.DEBUG, handlers=[file_handler, console_handler])
 
 
+def init_db_handler():
+    db = DBHandler()
+    db.init('../secrets/local.env')
+
+
 def main():
     try:
         init_logger()
+        init_db_handler()
 
-        db = DBHandler('../secrets/local.env')
         server = HttpsServer(os.path.abspath('../secrets/cert.pem'), os.path.abspath('../secrets/key.pem'))
         server.run()
     except Exception as e:
