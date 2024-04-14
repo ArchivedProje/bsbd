@@ -27,7 +27,14 @@ class DBHandler:
             'get_orders':   'SELECT o.* \
                             FROM agency.dbo.orders o \
                             INNER JOIN agency.dbo.clients c ON o.client_id = c.id \
-                            WHERE c.login = \'{login}\''
+                            WHERE c.login = \'{login}\'',
+            'get_order':    'SELECT * FROM agency.dbo.orders WHERE id = CAST(\'{id}\' AS uniqueidentifier)',
+            'get_billing':  'SELECT b.* \
+                            FROM agency.dbo.billings b \
+                            JOIN agency.dbo.billings_orders bo ON b.id = bo.billing_id \
+                            WHERE bo.order_id = CAST(\'{id}\' as uniqueidentifier)',
+            'get_realtor':  'SELECT * FROM agency.dbo.realtors WHERE id = CAST(\'{id}\' AS uniqueidentifier)',
+            'get_contract': 'SELECT * FROM agency.dbo.contracts WHERE id = CAST(\'{id}\' AS uniqueidentifier)'
         }
 
     def init(self, path_to_env_file):
@@ -52,6 +59,18 @@ class DBHandler:
 
     def get_orders(self, login):
         return self.__execute(self.sql_requests['get_orders'].format(login=login))
+
+    def get_order(self, order_id):
+        return self.__execute(self.sql_requests['get_order'].format(id=order_id))
+
+    def get_billing(self, billing_id):
+        return self.__execute(self.sql_requests['get_billing'].format(id=billing_id))
+
+    def get_realtor(self, realtor_id):
+        return self.__execute(self.sql_requests['get_realtor'].format(id=realtor_id))
+
+    def get_contract(self, contract_id):
+        return self.__execute(self.sql_requests['get_contract'].format(id=contract_id))
 
     def close(self):
         self.conn.close()

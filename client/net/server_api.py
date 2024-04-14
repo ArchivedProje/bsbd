@@ -53,3 +53,19 @@ class ServerApi:
     def get_orders(self, login):
         data = {'login': login}
         return self.__send_request('orders', data, 'GET')
+
+    def get_order(self, order_id):
+        data = {'id': order_id}
+        return self.__send_request('order', data, 'GET')
+
+    def get_billing(self, billing_id):
+        data = {'id': billing_id}
+        return self.__send_request('billing', data, 'GET')
+
+    def get_realtor(self, realtor_id):
+        data = {'id': realtor_id}
+        return self.__send_request('realtor', data, 'GET')
+
+    def get_contract(self, contract_id):
+        data = {'id': contract_id}
+        return self.__send_request('contract', data, 'GET')

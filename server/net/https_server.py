@@ -53,12 +53,86 @@ def get_orders():
     for row in res:
         order = {
             'id': row[0],
-            'client_id': row[1],
-            'realtor_id': row[2],
-            'status': row[3],
-            'start_date': row[4].strftime("%Y-%m-%d %H:%M:%S")
+            'status': row[6],
+            'start_date': row[7].strftime("%Y-%m-%d %H:%M:%S")
         }
-        if row[5] is not None:
-            order['end_date'] = row[5].strftime("%Y-%m-%d %H:%M:%S")
+        if row[8] is not None:
+            order['end_date'] = row[8].strftime("%Y-%m-%d %H:%M:%S")
         out.append(order)
     return make_response(json.dumps(out), 200)
+
+
+@app.route('/order', methods=['GET'])
+def get_order():
+    if 'id' not in request.args:
+        return make_response('id field not found', 404)
+    res = DBHandler().get_order(request.args['id']).fetchone()
+    if res is None:
+        return make_response('internal server error', 500)
+
+    order = {
+        'id': res[0],
+        'order_number': res[1],
+        'client_id': res[2],
+        'contract_id': res[3],
+        'realtor_id': res[4],
+        'basic_info': res[5],
+        'status': res[6],
+        'start_date': res[7].strftime("%Y-%m-%d %H:%M:%S")
+    }
+    if res[8] is not None:
+        order['end_date'] = res[8].strftime("%Y-%m-%d %H:%M:%S")
+    return make_response(json.dumps(order), 200)
+
+
+@app.route('/billing', methods=['GET'])
+def get_billing():
+    if 'id' not in request.args:
+        return make_response('id field not found', 404)
+    res = DBHandler().get_billing(request.args['id']).fetchone()
+    if res is None:
+        return make_response('internal server error', 500)
+
+    billing = {
+        'id': res[0],
+        'status': res[1],
+        'price': res[2]
+    }
+    if res[3] is not None:
+        billing['payment_date'] = res[3].strftime("%Y-%m-%d %H:%M:%S")
+    return make_response(json.dumps(billing), 200)
+
+
+@app.route('/realtor', methods=['GET'])
+def get_realtor():
+    if 'id' not in request.args:
+        return make_response('id field not found', 404)
+    res = DBHandler().get_realtor(request.args['id']).fetchone()
+    if res is None:
+        return make_response('internal server error', 500)
+
+    realtor = {
+        'id': res[0],
+        'phone_number': res[1],
+        'rating': res[2],
+        'experience': res[3],
+        'full_name': res[4]
+    }
+    return make_response(json.dumps(realtor), 200)
+
+
+@app.route('/contract', methods=['GET'])
+def get_contract():
+    if 'id' not in request.args:
+        return make_response('id field not found', 404)
+    res = DBHandler().get_contract(request.args['id']).fetchone()
+    if res is None:
+        return make_response('internal server error', 500)
+
+    realtor = {
+        'id': res[0],
+        'reg_number': res[1],
+        'contract_number': res[2],
+        'details': res[3]
+    }
+    return make_response(json.dumps(realtor), 200)

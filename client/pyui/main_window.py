@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow
 from client.pyui.main_window_model import Ui_MainWindow
+from client.pyui.order_window import OrderWindow
 from enum import Enum
 import logging
 import json
@@ -33,18 +34,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             raise MainWindowException('failed to get data from server')
 
         self.ordersBtn.clicked.connect(self.__show_orders)
-        self.billingsBtn.clicked.connect(self.__show_billings)
+        self.listWidget.itemClicked.connect(self.__show_specific_order)
         self.__show_orders()
+
+    def __show_specific_order(self, item):
+        self.listWidget.setEnabled(False)
+        try:
+            order_id = int(item.text().split()[1]) - 1
+        except ValueError:
+            return
+        order_window = OrderWindow(self.orders[order_id], self.server_api, self)
+        order_window.show()
+        self.listWidget.setEnabled(True)
 
     def __show_orders(self):
         self.listWidget.clear()
         for idx, order in enumerate(self.orders):
             self.listWidget.addItem(f'Заказ: {idx + 1} от {order["start_date"]}. Статус: {order["status"]}')
-
-    def __show_billings(self):
-        self.listWidget.clear()
-        for idx, billing in enumerate(self.billings):
-            self.listWidget.addItem(f'Счёт: {idx + 1} от {billing["payment_date"]}. Цена: {billing["price"]}. Статус: {billing["status"]}')
 
     def __get_role(self):
         response = self.server_api.get_role(self.login)
@@ -58,14 +64,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return possible_roles.get(response.text, Roles.Unknown)
         return None
 
-    def __handle_billings_response(self, msg):
-        try:
-            self.billings = json.loads(msg)
-        except ValueError as e:
-            logging.warning(f'invalid json: {e}')
-            return False
-        return True
-
     def __handle_orders_response(self, msg):
         try:
             self.orders = json.loads(msg)
@@ -75,11 +73,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return True
 
     def __get_client_data(self):
-        response = self.server_api.get_billings(self.login)
-        if response is None or response.status_code != 200:
-            return False
-        if not self.__handle_billings_response(response.text):
-            return False
         response = self.server_api.get_orders(self.login)
         if response is None or response.status_code != 200:
             return False

@@ -35,16 +35,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="billingsBtn">
-       <property name="text">
-        <string>Счета</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="notifyBtn">
        <property name="text">
         <string>Уведомления</string>
