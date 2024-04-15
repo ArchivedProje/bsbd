@@ -13,20 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>10</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Номер счета</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="closeBtn">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -39,11 +26,11 @@
     <string>Закрыть</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="priceEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>60</y>
+     <y>30</y>
      <width>231</width>
      <height>22</height>
     </rect>
@@ -53,7 +40,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>40</y>
+     <y>10</y>
      <width>55</width>
      <height>16</height>
     </rect>
@@ -62,11 +49,11 @@
     <string>Цена</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="statusEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>120</y>
+     <y>90</y>
      <width>231</width>
      <height>22</height>
     </rect>
@@ -79,7 +66,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>100</y>
+     <y>70</y>
      <width>55</width>
      <height>16</height>
     </rect>
@@ -88,11 +75,11 @@
     <string>Статус</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="paymentDateEdit">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>184</y>
+     <y>154</y>
      <width>231</width>
      <height>22</height>
     </rect>
@@ -105,7 +92,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>160</y>
+     <y>130</y>
      <width>101</width>
      <height>20</height>
     </rect>

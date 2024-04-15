@@ -101,7 +101,7 @@
     <string>Счет</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="billingBtn">
    <property name="geometry">
     <rect>
      <x>150</x>
@@ -127,7 +127,7 @@
     <string>Риелтор</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="realtorBtn">
    <property name="geometry">
     <rect>
      <x>150</x>
@@ -202,7 +202,7 @@
     <string>Договор</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="contractBtn">
    <property name="geometry">
     <rect>
      <x>150</x>

@@ -1,5 +1,8 @@
 from PyQt5.QtWidgets import QMainWindow
 from client.pyui.order_window_model import Ui_Form
+from client.pyui.billing_window import BillingWindow
+from client.pyui.realtor_window import RealtorWindow
+from client.pyui.contract_window import ContractWindow
 import json
 import logging
 
@@ -14,18 +17,26 @@ class OrderWindowException(Exception):
 
 
 class OrderWindow(QMainWindow, Ui_Form):
-    def __init__(self, order, server_api, parent=None):
+    def __init__(self, order, server_api, callback, parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.server_api = server_api
         if 'id' not in order:
             raise OrderWindowException('invalid order params')
         self.order = order
+        self.callback = callback
         if not (
                 self.__get_order_info() and self.__get_billing_info() and self.__get_realtor_info() and self.__get_contract_info()):
             raise OrderWindowException('failed to get info about order')
         self.__init_ui()
         self.closeBtn.clicked.connect(self.close)
+        self.billingBtn.clicked.connect(self.__show_billing)
+        self.realtorBtn.clicked.connect(self.__show_realtor)
+        self.contractBtn.clicked.connect(self.__show_contract)
+
+    def closeEvent(self, event):
+        self.callback()
+        event.accept()
 
     def __get_order_info(self):
         response = self.server_api.get_order(self.order['id'])
@@ -87,6 +98,18 @@ class OrderWindow(QMainWindow, Ui_Form):
         self.contract['contract_number'] = json_resp['contract_number']
         self.contract['details'] = json_resp['details']
         return True
+
+    def __show_billing(self):
+        billing_wnd = BillingWindow(self.billing, self)
+        billing_wnd.show()
+
+    def __show_realtor(self):
+        realtor_wnd = RealtorWindow(self.realtor, self)
+        realtor_wnd.show()
+
+    def __show_contract(self):
+        contract_wnd = ContractWindow(self.contract, self)
+        contract_wnd.show()
 
     def __init_ui(self):
         self.orderNumberLbl.setText(f'Заказ №{self.order["order_number"]}')

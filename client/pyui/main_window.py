@@ -35,6 +35,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.ordersBtn.clicked.connect(self.__show_orders)
         self.listWidget.itemClicked.connect(self.__show_specific_order)
+        self.__opened_orders = []
         self.__show_orders()
 
     def __show_specific_order(self, item):
@@ -43,8 +44,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             order_id = int(item.text().split()[1]) - 1
         except ValueError:
             return
-        order_window = OrderWindow(self.orders[order_id], self.server_api, self)
+        if order_id in self.__opened_orders:
+            self.listWidget.setEnabled(True)
+            return
+
+        def callback():
+            self.__opened_orders.pop(order_id)
+
+        order_window = OrderWindow(self.orders[order_id], self.server_api, callback, self)
         order_window.show()
+        self.__opened_orders.append(order_id)
         self.listWidget.setEnabled(True)
 
     def __show_orders(self):
