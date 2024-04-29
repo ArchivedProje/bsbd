@@ -6,67 +6,161 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
-    <height>600</height>
+    <width>880</width>
+    <height>615</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>880</width>
+    <height>615</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>880</width>
+    <height>615</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(122, 120, 204);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>160</width>
-      <height>351</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="ordersBtn">
-       <property name="text">
-        <string>Заказы</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="notifyBtn">
-       <property name="text">
-        <string>Уведомления</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="supportBtn">
-       <property name="text">
-        <string>Поддержка</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>0</y>
-      <width>691</width>
-      <height>541</height>
+      <x>170</x>
+      <y>10</y>
+      <width>705</width>
+      <height>550</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">text-align: center;</string>
+     <string notr="true">background-color: rgb(235, 235, 235);
+text-align: center;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ordersBtn">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>173</y>
+      <width>160</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(184, 236, 171);
+border: 2px solid black;</string>
+    </property>
+    <property name="text">
+     <string>Заказы</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="notifyBtn">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>336</y>
+      <width>160</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+border: 2px solid black;
+background-color: rgb(184, 236, 171);</string>
+    </property>
+    <property name="text">
+     <string>Уведомления</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="supportBtn">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>500</y>
+      <width>160</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(184, 236, 171);
+border: 2px solid black;</string>
+    </property>
+    <property name="text">
+     <string>Поддержка</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ordersBtn_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>10</y>
+      <width>160</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri Light</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(184, 236, 171);
+border: 2px solid black;</string>
+    </property>
+    <property name="text">
+     <string>Профиль</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
@@ -75,7 +169,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>853</width>
+     <width>880</width>
      <height>26</height>
     </rect>
    </property>

@@ -4,7 +4,7 @@ from client.pyui.billing_window import BillingWindow
 from client.pyui.realtor_window import RealtorWindow
 from client.pyui.contract_window import ContractWindow
 import json
-import logging
+import base64
 
 
 class OrderWindowException(Exception):
@@ -29,7 +29,6 @@ class OrderWindow(QMainWindow, Ui_Form):
                 self.__get_order_info() and self.__get_billing_info() and self.__get_realtor_info() and self.__get_contract_info()):
             raise OrderWindowException('failed to get info about order')
         self.__init_ui()
-        self.closeBtn.clicked.connect(self.close)
         self.billingBtn.clicked.connect(self.__show_billing)
         self.realtorBtn.clicked.connect(self.__show_realtor)
         self.contractBtn.clicked.connect(self.__show_contract)
@@ -82,6 +81,7 @@ class OrderWindow(QMainWindow, Ui_Form):
         self.realtor['phone_number'] = json_resp['phone_number']
         self.realtor['rating'] = json_resp['rating']
         self.realtor['experience'] = json_resp['experience']
+        self.realtor['photo'] = base64.b64decode(json_resp['photo'])
         return True
 
     def __get_contract_info(self):

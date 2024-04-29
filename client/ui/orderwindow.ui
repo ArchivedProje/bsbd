@@ -6,21 +6,42 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>474</width>
-    <height>622</height>
+    <width>471</width>
+    <height>596</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>471</width>
+    <height>596</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>471</width>
+    <height>596</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(122, 120, 204);</string>
   </property>
   <widget class="QLabel" name="orderNumberLbl">
    <property name="geometry">
     <rect>
      <x>170</x>
      <y>10</y>
-     <width>101</width>
-     <height>16</height>
+     <width>151</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Номер заказа</string>
@@ -30,10 +51,21 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>60</y>
+     <y>70</y>
      <width>451</width>
-     <height>121</height>
+     <height>70</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;
+border: 2px solid black;</string>
    </property>
   </widget>
   <widget class="QLabel" name="commonInfoLbl">
@@ -41,9 +73,15 @@
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>151</width>
-     <height>16</height>
+     <width>201</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Общая информация</string>
@@ -53,10 +91,21 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>200</y>
-     <width>113</width>
-     <height>22</height>
+     <y>175</y>
+     <width>451</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string/>
@@ -66,10 +115,21 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>250</y>
-     <width>113</width>
-     <height>22</height>
+     <y>240</y>
+     <width>341</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string/>
@@ -79,10 +139,16 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>180</y>
+     <y>145</y>
      <width>151</width>
-     <height>16</height>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Статус</string>
@@ -92,10 +158,16 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
+     <y>210</y>
      <width>55</width>
-     <height>16</height>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Счет</string>
@@ -104,11 +176,16 @@
   <widget class="QPushButton" name="billingBtn">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>250</y>
-     <width>93</width>
-     <height>28</height>
+     <x>360</x>
+     <y>240</y>
+     <width>101</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 10px;
+border: 2px solid black;
+background-color: rgb(184, 236, 171);</string>
    </property>
    <property name="text">
     <string>Подробнее</string>
@@ -118,10 +195,16 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>290</y>
-     <width>55</width>
-     <height>16</height>
+     <y>275</y>
+     <width>81</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Риелтор</string>
@@ -130,11 +213,16 @@
   <widget class="QPushButton" name="realtorBtn">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>310</y>
-     <width>93</width>
-     <height>28</height>
+     <x>360</x>
+     <y>305</y>
+     <width>101</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 10px;
+border: 2px solid black;
+background-color: rgb(184, 236, 171);</string>
    </property>
    <property name="text">
     <string>Подробнее</string>
@@ -144,10 +232,21 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>310</y>
-     <width>113</width>
-     <height>22</height>
+     <y>305</y>
+     <width>341</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string/>
@@ -157,36 +256,40 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>410</y>
+     <y>435</y>
      <width>451</width>
      <height>151</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;
+border: 2px solid black;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>390</y>
-     <width>55</width>
-     <height>16</height>
+     <y>405</y>
+     <width>71</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Детали</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="closeBtn">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>590</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Закрыть</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_7">
@@ -194,9 +297,15 @@
     <rect>
      <x>10</x>
      <y>340</y>
-     <width>55</width>
-     <height>16</height>
+     <width>91</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Договор</string>
@@ -205,11 +314,16 @@
   <widget class="QPushButton" name="contractBtn">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>360</y>
-     <width>93</width>
-     <height>28</height>
+     <x>360</x>
+     <y>370</y>
+     <width>101</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius: 10px;
+border: 2px solid black;
+background-color: rgb(184, 236, 171);</string>
    </property>
    <property name="text">
     <string>Подробнее</string>
@@ -219,10 +333,21 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>360</y>
-     <width>113</width>
-     <height>22</height>
+     <y>370</y>
+     <width>341</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string/>

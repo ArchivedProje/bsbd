@@ -7,7 +7,6 @@ class BillingWindow(QMainWindow, Ui_Form):
         super().__init__(parent)
         self.setupUi(self)
         self.__init_ui(billing)
-        self.closeBtn.clicked.connect(self.close)
 
     def __init_ui(self, billing):
         self.priceEdit.setText(str(billing["price"]))

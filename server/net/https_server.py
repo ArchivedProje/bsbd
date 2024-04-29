@@ -1,6 +1,7 @@
 from flask import Flask, make_response, request
 from server.db.db_api import DBHandler
 import json
+import base64
 
 app = Flask(__name__)
 
@@ -16,12 +17,17 @@ class HttpsServer:
 
 @app.route('/authorize', methods=['POST'])
 def authorize():
-    return make_response('authorized', 200)
-
-
-@app.route('/role', methods=['GET'])
-def get_role():
-    return make_response('client', 200)
+    if 'login' not in request.form:
+        return make_response('login field not found', 404)
+    if 'password' not in request.form:
+        return make_response('password field not found', 404)
+    res = DBHandler().authorize(request.form['login'], request.form['password']).fetchone()
+    if res is None:
+        return make_response('invalid credentials', 403)
+    out = {
+        'role': res[0].strip()
+    }
+    return make_response(json.dumps(out), 200)
 
 
 @app.route('/billings', methods=['GET'])
@@ -30,7 +36,7 @@ def get_billings():
         return make_response('login field not found', 404)
     res = DBHandler().get_billings(request.args['login'])
     if res is None:
-        return make_response('internal server error', 500)
+        return make_response('invalid fields in request', 404)
     out = list()
     for row in res:
         out.append({
@@ -48,7 +54,7 @@ def get_orders():
         return make_response('login field not found', 404)
     res = DBHandler().get_orders(request.args['login'])
     if res is None:
-        return make_response('internal server error', 500)
+        return make_response('invalid fields in request', 404)
     out = list()
     for row in res:
         order = {
@@ -68,7 +74,7 @@ def get_order():
         return make_response('id field not found', 404)
     res = DBHandler().get_order(request.args['id']).fetchone()
     if res is None:
-        return make_response('internal server error', 500)
+        return make_response('invalid fields in request', 404)
 
     order = {
         'id': res[0],
@@ -91,7 +97,7 @@ def get_billing():
         return make_response('id field not found', 404)
     res = DBHandler().get_billing(request.args['id']).fetchone()
     if res is None:
-        return make_response('internal server error', 500)
+        return make_response('invalid fields in request', 404)
 
     billing = {
         'id': res[0],
@@ -109,14 +115,15 @@ def get_realtor():
         return make_response('id field not found', 404)
     res = DBHandler().get_realtor(request.args['id']).fetchone()
     if res is None:
-        return make_response('internal server error', 500)
+        return make_response('invalid fields in request', 404)
 
     realtor = {
         'id': res[0],
         'phone_number': res[1],
         'rating': res[2],
         'experience': res[3],
-        'full_name': res[4]
+        'full_name': res[4],
+        'photo': base64.encodebytes(res[5]).decode('utf-8')
     }
     return make_response(json.dumps(realtor), 200)
 
@@ -127,7 +134,7 @@ def get_contract():
         return make_response('id field not found', 404)
     res = DBHandler().get_contract(request.args['id']).fetchone()
     if res is None:
-        return make_response('internal server error', 500)
+        return make_response('invalid fields in request', 404)
 
     realtor = {
         'id': res[0],
