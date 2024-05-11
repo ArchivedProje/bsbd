@@ -123,8 +123,14 @@ def get_realtor():
         'rating': res[2],
         'experience': res[3],
         'full_name': res[4],
-        'photo': base64.encodebytes(res[5]).decode('utf-8')
+        'photo': base64.encodebytes(res[5]).decode('utf-8'),
+        'responses': list()
     }
+    res = DBHandler().get_responses(request.args['id'])
+    if res is None:
+        return make_response('invalid fields in request', 404)
+    for response in res:
+        realtor['responses'].append(response[0])
     return make_response(json.dumps(realtor), 200)
 
 
@@ -143,3 +149,32 @@ def get_contract():
         'details': res[3]
     }
     return make_response(json.dumps(realtor), 200)
+
+
+@app.route('/response', methods=['POST'])
+def add_response():
+    if 'login' not in request.form:
+        return make_response('login field not found', 404)
+    if 'message' not in request.form:
+        return make_response('message field not found', 404)
+    if 'realtor_id' not in request.form:
+        return make_response('realtor_id field not found', 404)
+    DBHandler().add_response(request.form['login'], request.form['message'], request.form['realtor_id'])
+    return make_response('OK', 200)
+
+
+@app.route('/profile', methods=['GET'])
+def get_profile():
+    if 'login' not in request.args:
+        return make_response('login field not found', 404)
+    res = DBHandler().get_profile(request.args['login']).fetchone()
+    if res is None:
+        return make_response('invalid fields in request', 404)
+
+    profile = {
+        'full_name': res[1],
+        'phone_number': res[2],
+        'login': res[3],
+        'photo': base64.encodebytes(res[4]).decode('utf-8')
+    }
+    return make_response(json.dumps(profile), 200)

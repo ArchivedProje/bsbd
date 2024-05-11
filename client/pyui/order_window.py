@@ -17,9 +17,10 @@ class OrderWindowException(Exception):
 
 
 class OrderWindow(QMainWindow, Ui_Form):
-    def __init__(self, order, server_api, callback, parent=None):
+    def __init__(self, login, order, server_api, callback, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        self.login = login
         self.server_api = server_api
         if 'id' not in order:
             raise OrderWindowException('invalid order params')
@@ -82,6 +83,7 @@ class OrderWindow(QMainWindow, Ui_Form):
         self.realtor['rating'] = json_resp['rating']
         self.realtor['experience'] = json_resp['experience']
         self.realtor['photo'] = base64.b64decode(json_resp['photo'])
+        self.realtor['responses'] = json_resp['responses']
         return True
 
     def __get_contract_info(self):
@@ -104,7 +106,7 @@ class OrderWindow(QMainWindow, Ui_Form):
         billing_wnd.show()
 
     def __show_realtor(self):
-        realtor_wnd = RealtorWindow(self.realtor, self)
+        realtor_wnd = RealtorWindow(self.realtor, self.login, self.server_api, self)
         realtor_wnd.show()
 
     def __show_contract(self):

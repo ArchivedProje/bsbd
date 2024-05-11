@@ -69,3 +69,15 @@ class ServerApi:
     def get_contract(self, contract_id):
         data = {'id': contract_id}
         return self.__send_request('contract', data, 'GET')
+
+    def add_response(self, login, message, realtor_id):
+        data = {
+            'login': login,
+            'message': message,
+            'realtor_id': realtor_id
+        }
+        return self.__send_request('response', data, 'POST')
+
+    def get_profile(self, login):
+        data = {'login': login}
+        return self.__send_request('profile', data, 'GET')

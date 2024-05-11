@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow
 from client.pyui.main_window_model import Ui_MainWindow
 from client.pyui.order_window import OrderWindow
+from client.pyui.profile_window import ProfileWindow
 from enum import Enum
 import logging
 import json
@@ -33,10 +34,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if not self.__get_data_from_server():
             raise MainWindowException('failed to get data from server')
 
+        self.profileBtn.clicked.connect(self.__show_profile)
         self.ordersBtn.clicked.connect(self.__show_orders)
         self.listWidget.itemClicked.connect(self.__show_specific_order)
         self.__opened_orders = []
         self.__show_orders()
+
+    def __show_profile(self):
+        profile_window = ProfileWindow(self.profile, self)
+        profile_window.show()
 
     def __show_specific_order(self, item):
         self.listWidget.setEnabled(False)
@@ -51,7 +57,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         def callback():
             self.__opened_orders.pop(order_id)
 
-        order_window = OrderWindow(self.orders[order_id], self.server_api, callback, self)
+        order_window = OrderWindow(self.login, self.orders[order_id], self.server_api, callback, self)
         order_window.show()
         self.__opened_orders.append(order_id)
         self.listWidget.setEnabled(True)
@@ -69,11 +75,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return False
         return True
 
+    def __handle_profile_response(self, msg):
+        try:
+            self.profile = json.loads(msg)
+        except ValueError as e:
+            logging.warning(f'invalid json: {e}')
+            return False
+        return True
+
     def __get_client_data(self):
         response = self.server_api.get_orders(self.login)
         if response is None or response.status_code != 200:
             return False
         if not self.__handle_orders_response(response.text):
+            return False
+        response = self.server_api.get_profile(self.login)
+        if response is None or response.status_code != 200:
+            return False
+        if not self.__handle_profile_response(response.text):
             return False
         return True
 

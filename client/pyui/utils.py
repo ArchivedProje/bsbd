@@ -11,6 +11,14 @@ def show_error_window(msg):
     msgbox.exec()
 
 
+def show_success_window(msg):
+    msgbox = QMessageBox()
+    msgbox.setIcon(QMessageBox.Information)
+    msgbox.setText(msg)
+    msgbox.setStandardButtons(QMessageBox.Ok)
+    msgbox.exec()
+
+
 def hash_password(password):
     passwd_len = len(password)
     for i in range(passwd_len):

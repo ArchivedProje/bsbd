@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>690</width>
-    <height>435</height>
+    <width>460</width>
+    <height>220</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>690</width>
-    <height>435</height>
+    <width>460</width>
+    <height>220</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>690</width>
-    <height>435</height>
+    <width>460</width>
+    <height>220</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -28,54 +28,25 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(122, 120, 204);</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>131</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <widget class="QLineEdit" name="fullNameEdit">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>150</x>
      <y>40</y>
-     <width>490</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Calibri Light</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 10px;
-border: 2px solid black;</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="ratingEdit">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>110</y>
-     <width>90</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Calibri Light</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 10px;
-border: 2px solid black;</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="experienceEdit">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>110</y>
-     <width>150</width>
+     <width>301</width>
      <height>30</height>
     </rect>
    </property>
@@ -94,9 +65,9 @@ border: 2px solid black;</string>
   <widget class="QLineEdit" name="phoneNumberEdit">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>150</x>
      <y>110</y>
-     <width>230</width>
+     <width>301</width>
      <height>30</height>
     </rect>
    </property>
@@ -112,14 +83,20 @@ border-radius: 10px;
 border: 2px solid black;</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="responsesList">
+  <widget class="QLineEdit" name="loginEdit">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>184</y>
-     <width>670</width>
-     <height>241</height>
+     <x>150</x>
+     <y>180</y>
+     <width>301</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);
@@ -127,43 +104,12 @@ border-radius: 10px;
 border: 2px solid black;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="addResponseBtn">
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>147</y>
-     <width>111</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border-radius: 10px;
-border: 2px solid black;
-background-color: rgb(184, 236, 171);</string>
-   </property>
-   <property name="text">
-    <string>Оставить отзыв</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
+     <x>150</x>
      <y>10</y>
-     <width>170</width>
-     <height>151</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>10</y>
-     <width>71</width>
+     <width>55</width>
      <height>20</height>
     </rect>
    </property>
@@ -177,48 +123,10 @@ background-color: rgb(184, 236, 171);</string>
     <string>Имя</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
+  <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>80</y>
-     <width>81</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Calibri Light</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Рейтинг</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_8">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>80</y>
-     <width>131</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Calibri Light</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Опыт работы</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_9">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
+     <x>150</x>
      <y>80</y>
      <width>91</width>
      <height>20</height>
@@ -232,6 +140,25 @@ background-color: rgb(184, 236, 171);</string>
    </property>
    <property name="text">
     <string>Телефон</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>150</y>
+     <width>91</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Calibri Light</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Логин</string>
    </property>
   </widget>
  </widget>
